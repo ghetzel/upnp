@@ -2,8 +2,9 @@
 .EXPORT_ALL_VARIABLES:
 
 GO111MODULE ?= on
+BIN         ?= bin/upnpc-$(shell go env GOOS)-$(shell go env GOARCH)
 
-all: deps fmt bin/upnpc
+all: deps fmt $(BIN)
 
 deps:
 	go get ./...
@@ -12,5 +13,5 @@ deps:
 fmt:
 	go fmt ./...
 
-bin/upnpc:
-	go build -o bin/upnpc cmd/*.go
+$(BIN):
+	go build -o $(BIN) cmd/*.go
